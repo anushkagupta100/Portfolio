@@ -1,8 +1,6 @@
-import { Award, Briefcase, Code, ExternalLink, Github, GraduationCap, Linkedin, Mail, MapPin, Menu, Moon, Phone, Star, Sun, User, X, Zap } from 'lucide-react';
-import { useEffect, useState } from 'react';
-// 📸 Import your local image
+import React, { useState, useEffect } from 'react';
+import { Github, Linkedin, Mail, Phone, MapPin, ExternalLink, Star, Award, Code, Briefcase, GraduationCap, User, Menu, X, Sun, Moon, Zap } from 'lucide-react';
 import anushkaImage from './anushkaimg.jpeg';
-
 function App() {
   const [theme, setTheme] = useState('dark');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,7 +8,7 @@ function App() {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-  }, []);
+  }, [theme]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,6 +33,11 @@ function App() {
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     setIsMenuOpen(false);
+  };
+
+  const handleThemeChange = (newTheme: string) => {
+    setTheme(newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
   };
 
   const themes = [
@@ -69,8 +72,8 @@ function App() {
       tech: ['JavaScript', 'HTML5', 'CSS3', 'Responsive Design'],
       features: ['Dynamic Features', 'Seamless UX', 'Cross-device Optimization'],
       // 🔗 ADD YOUR PROJECT LINKS HERE
-      githubLink: 'https://github.com/anushkagupta100/gamics-gaming', // Replace with your actual GitHub repo
-      liveLink: 'https://gamicsgaming.vercel.app/', // Add live demo link if available
+      githubLink: 'https://github.com/anushkagupta100/gamics-platform', // Replace with your actual GitHub repo
+      liveLink: 'https://your-gamics-demo.netlify.app', // Add live demo link if available
       // 📸 ADD PROJECT IMAGE HERE (optional)
       image: 'https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&w=800' // Replace with your project image
     },
@@ -94,7 +97,7 @@ function App() {
     },
     {
       title: 'LeetCode Achievements',
-      description: '200+ challenging problems solved across algorithms and data structures',
+      description: '50+ challenging problems solved across algorithms and data structures',
       icon: Code
     },
     {
@@ -116,13 +119,13 @@ function App() {
     linkedin: 'https://www.linkedin.com/in/anushka-gupta-678337248/',
     github: 'https://github.com/anushkagupta100',
     leetcode: 'https://leetcode.com/u/anushka_g078/',
-    // 📸 NOW USING YOUR LOCAL IMAGE
-    profileImage: anushkaImage, // This now uses your local image file
+    // 📸 USING PLACEHOLDER PROFILE IMAGE
+    profileImage: anushkaImage,
     // 📊 UPDATE YOUR STATS HERE
     stats: {
-      cgpa: '8.08',
+      cgpa: '8.15',
       leetcodeProblems: '150+',
-      hackerrankStars: '4★'
+      hackerrankStars: '3★'
     }
   };
 
@@ -162,8 +165,9 @@ function App() {
               {themes.map(({ id, icon: Icon }) => (
                 <button
                   key={id}
-                  onClick={() => setTheme(id)}
+                  onClick={() => handleThemeChange(id)}
                   className={`theme-btn ${theme === id ? 'theme-btn-active' : ''}`}
+                  title={`Switch to ${id} theme`}
                 >
                   <Icon size={16} />
                 </button>
@@ -206,7 +210,7 @@ function App() {
           <div className="hero-visual">
             <div className="profile-card">
               <div className="profile-avatar">
-                {/* 📸 NOW DISPLAYS YOUR LOCAL IMAGE */}
+                {/* 📸 NOW DISPLAYS PLACEHOLDER IMAGE */}
                 <img 
                   src={personalInfo.profileImage} 
                   alt={personalInfo.name}
@@ -457,7 +461,7 @@ function App() {
                 <span>LinkedIn Profile</span>
               </a>
               <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="contact-link">
-                <Github size={24} />
+                <Linkedin size={24} />
                 <span>GitHub Profile</span>
               </a>
               <a href={personalInfo.leetcode} target="_blank" rel="noopener noreferrer" className="contact-link">
